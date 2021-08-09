@@ -37,7 +37,7 @@ class Utils(commands.Cog):
         
             await ctx.send(embed=message)
 
-    @commands.command(name='moneda')
+    @commands.command(name='coin')
     async def _coin(self, ctx):
         sides = {
             'fase': '<:coin_face:803747204090167296>',
@@ -47,7 +47,7 @@ class Utils(commands.Cog):
         result = choice(['fase', 'tail'])
         await ctx.send(sides[result])
 
-    @commands.command(name='dado')
+    @commands.command(name='dice')
     async def _dice(self, ctx):
         faces = {
             1: '<:dice_1:802710831698673674>',
