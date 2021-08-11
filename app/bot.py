@@ -1,6 +1,6 @@
 import os
 
-from discord import Intents
+from discord import Intents, Game
 from discord.ext.commands import Bot as BotBase
 from discord.ext.commands import CommandNotFound
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -24,6 +24,7 @@ class Bot(BotBase):
 
     async def on_connect(self):
         # What happends on connection.
+        await self.change_presence(activity=Game(name='<help'))
         print('bot connected')
 
     async def on_disconnected(self):
