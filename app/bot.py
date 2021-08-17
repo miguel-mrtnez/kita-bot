@@ -8,11 +8,10 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 class Bot(BotBase):
     def __init__(self):
-        super().__init__(
-            command_prefix=os.environ['BOT_PREFIX'], 
-            owner_ids=os.environ['BOT_OWNERS_IDS'],
-            intents=Intents.all()
-            )
+        super().__init__(command_prefix=os.environ['BOT_PREFIX'], 
+                         owner_ids=os.environ['BOT_OWNERS_IDS'],
+                         intents=Intents.all()
+                         )
         self.ready = False
         self.guild = None
         self.scheduler = AsyncIOScheduler()
