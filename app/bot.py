@@ -1,16 +1,20 @@
 import os
+from datetime import date
 
 from discord import Intents, Game
 from discord.ext.commands import Bot as BotBase
 from discord.ext.commands import CommandNotFound
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from apscheduler.triggers.cron import CronTrigger
+
+from .db.birthdates import birthdates
 
 
 class Bot(BotBase):
     def __init__(self):
         super().__init__(command_prefix=os.environ['BOT_PREFIX'], 
                          owner_ids=os.environ['BOT_OWNERS_IDS'],
-                         intents=Intents.all()
+                         intents=Intents().all()
                          )
         self.ready = False
         self.guild = None
@@ -46,9 +50,20 @@ class Bot(BotBase):
         if not self.ready:
             self.ready = True
             self.guild = self.get_guild(os.environ['GUILD_ID'])
+            self.scheduler.add_job(self.birthday, CronTrigger(minute=15))
+            self.scheduler.start()
         else:
             print('bot reconnected')
 
-    # async def on_message(self, message):
-    #     pass
-    # Controls what happends when a message with every message sent.
+    async def birthday(self):
+
+        today = date.today().strftime("%d-%m-%Y")
+        t_day, t_month, _ = today.split('-')
+
+        for key in birthdates:
+            p_day, p_month, _ = key.split('-')
+            if t_day == p_day and t_month == p_month:
+                member = birthdates[key]
+                channel = self.get_channel(870619817902739477)
+                await channel.send(f'{self.get_user(member).mention} está de cumpleaños :partying_face:! @here')
+
