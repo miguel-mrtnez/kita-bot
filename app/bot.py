@@ -64,6 +64,6 @@ class Bot(BotBase):
             p_day, p_month, _ = key.split('-')
             if t_day == p_day and t_month == p_month:
                 member = birthdates[key]
-                channel = self.get_channel(870619817902739477)
+                channel = self.get_channel(802999675346354224)
                 await channel.send(f'{self.get_user(member).mention} está de cumpleaños :partying_face:! @here')
 
