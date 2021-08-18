@@ -50,7 +50,7 @@ class Bot(BotBase):
         if not self.ready:
             self.ready = True
             self.guild = self.get_guild(os.environ['GUILD_ID'])
-            self.scheduler.add_job(self.birthday, CronTrigger(minute=15))
+            self.scheduler.add_job(self.birthday, CronTrigger(hour=0))
             self.scheduler.start()
         else:
             print('bot reconnected')
