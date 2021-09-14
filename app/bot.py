@@ -19,6 +19,7 @@ class Bot(BotBase):
         self.ready = False
         self.guild = None
         self.scheduler = AsyncIOScheduler()
+        self.scheduler.configure(timezone='Chile/Continental')
 
     def run(self):
         self.token = os.environ['BOT_TOKEN']
