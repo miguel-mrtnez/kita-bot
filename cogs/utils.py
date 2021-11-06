@@ -1,7 +1,7 @@
-from random import shuffle, choice, randint
+from random import choice, randint, shuffle
 
-from discord.ext import commands
 from discord import Embed
+from discord.ext import commands
 
 
 class Utils(commands.Cog):
@@ -18,7 +18,7 @@ class Utils(commands.Cog):
 
         if n > len(args):
             await ctx.send('El número de teams supera al número de players')
-        
+
         else:
             people = list(args)
             shuffle(people)
@@ -29,12 +29,12 @@ class Utils(commands.Cog):
                 i += 1
                 if i == n:
                     i = 0
-        
+
             message = Embed(color=0xFF0000)
             for team in range(n):
                 name, value = (f'Team {team + 1}', '\n '.join(teams[team]))
                 message.add_field(name=name, value=value, inline=False)
-        
+
             await ctx.send(embed=message)
 
     @commands.command(name='coin')
@@ -43,7 +43,7 @@ class Utils(commands.Cog):
             'fase': '<:coin_face:803747204090167296>',
             'tail': '<:coin_tail:803747228702343188>'
         }
-        
+
         result = choice(['fase', 'tail'])
         await ctx.send(sides[result])
 
@@ -57,11 +57,11 @@ class Utils(commands.Cog):
             5: '<:dice_5:802710944059752489>',
             6: '<:dice_6:802710962683641897>'
         }
-        
+
         result = randint(1, 6)
         await ctx.send(faces[result])
 
     @commands.command(name='choice')
     async def _choice(self, ctx, *args):
-        
+
         await ctx.send(choice(args))

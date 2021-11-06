@@ -1,18 +1,18 @@
 import os
 from datetime import date
 
-from discord import Intents, Game
-from discord.ext.commands import Bot as BotBase
-from discord.ext.commands import CommandNotFound
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
+from discord import Game, Intents
+from discord.ext.commands import Bot as BotBase
+from discord.ext.commands import CommandNotFound
 
 from .db.birthdates import birthdates
 
 
 class Bot(BotBase):
     def __init__(self):
-        super().__init__(command_prefix=os.environ['BOT_PREFIX'], 
+        super().__init__(command_prefix=os.environ['BOT_PREFIX'],
                          owner_ids=os.environ['BOT_OWNERS_IDS'],
                          intents=Intents().all()
                          )
@@ -67,4 +67,3 @@ class Bot(BotBase):
                 member = birthdates[key]
                 channel = self.get_channel(802999675346354224)
                 await channel.send(f'{self.get_user(member).mention} está de cumpleaños :partying_face:! @here')
-
