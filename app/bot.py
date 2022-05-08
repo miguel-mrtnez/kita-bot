@@ -66,4 +66,4 @@ class Bot(BotBase):
             if t_day == p_day and t_month == p_month:
                 member = birthdates[key]
                 channel = self.get_channel(802999675346354224)
-                await channel.send(f'{self.get_user(member).mention} está de cumpleaños :partying_face:! @here')
+                await channel.send(f'{self.get_user(member).mention} estará de cumpleaños mañana :partying_face:! @here')
